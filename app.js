@@ -33,6 +33,12 @@ function closeNotification() {
 function showJackpotNotification(message, isWin) {
     closeNotification(); // Đóng thông báo hiện tại nếu có
 
+    // Tạo pháo hoa trước khi hiển thị thông báo
+    if (isWin) {
+        createFireworks();
+    }
+
+    // Tạo thông báo
     const jackpotNotification = document.createElement('div');
     jackpotNotification.classList.add('jackpot-notification');
     if (!isWin) {
@@ -44,15 +50,10 @@ function showJackpotNotification(message, isWin) {
     // Lưu thông báo hiện tại
     currentNotification = jackpotNotification;
 
-    // Hiển thị thông báo
+    // Hiển thị thông báo ngay lập tức
     setTimeout(() => {
         jackpotNotification.classList.add('show');
     }, 100);
-
-    // Tạo hiệu ứng pháo hoa nếu thắng
-    if (isWin) {
-        createFireworks();
-    }
 
     // Ẩn thông báo sau 15 giây
     setTimeout(() => {
@@ -60,29 +61,53 @@ function showJackpotNotification(message, isWin) {
     }, 15000); // 15 giây
 }
 
-
-
 function createFireworks() {
     const fireworksContainer = document.createElement('div');
     fireworksContainer.classList.add('fireworks');
     document.body.appendChild(fireworksContainer);
 
-    for (let i = 0; i < 50; i++) {
+    // Tạo nhiều pháo hoa
+    for (let i = 0; i < 150; i++) {
         const firework = document.createElement('div');
         firework.classList.add('firework');
         firework.style.left = `${Math.random() * 100}%`;
         firework.style.top = `${Math.random() * 100}%`;
-        firework.style.animationDelay = `${Math.random() * 1}s`;
+        firework.style.animationDelay = `${Math.random() * 2}s`;
+        firework.style.backgroundColor = getRandomColor();
         fireworksContainer.appendChild(firework);
+
+        // Đảm bảo animation bắt đầu ngay lập tức
+        setTimeout(() => {
+            firework.style.animationPlayState = 'running';
+        }, 10); // Độ trễ nhỏ để đảm bảo phần tử đã được thêm vào DOM
     }
 
-    // Xóa hiệu ứng pháo hoa sau 2 giây
+    // Xóa container pháo hoa sau 7 giây
     setTimeout(() => {
         fireworksContainer.remove();
-    }, 2000);
+    }, 7000); // Kéo dài thời gian tồn tại lên 7 giây
+}
+
+function getRandomColor() {
+    const colors = ["#ff1493", "#00ffff", "#ff4500", "#ffd700", "#7cfc00", "#ff69b4", "#00ff7f"];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+function fadeOutFireworks() {
+    const fireworksContainer = document.querySelector('.fireworks');
+    if (fireworksContainer) {
+        // Kích hoạt hiệu ứng fade-out
+        fireworksContainer.classList.add('fade-out');
+
+        // Xóa container pháo hoa sau khi hiệu ứng kết thúc
+        setTimeout(() => {
+            fireworksContainer.remove();
+        }, 1000); // 1 giây (thời gian của hiệu ứng fade-out)
+    }
 }
 function playGame(choice) {
-    closeNotification(); // Đóng thông báo hiện tại khi bắt đầu lượt cược mới
+    // Đóng thông báo hiện tại và fade-out pháo hoa
+    closeNotification();
+    fadeOutFireworks();
 
     const betInput = document.getElementById("bet-amount").value.replace(/\D/g, "");
     const betAmount = parseInt(betInput, 10);
@@ -135,8 +160,12 @@ function playGame(choice) {
         }
 
         // Xóa số tiền đã cược sau khi hiển thị kết quả
-    
+      
     }, 1200); // Kết thúc quay trong 1.2 giây
+}
+function clearBet() {
+    const betInput = document.getElementById("bet-amount");
+    betInput.value = ""; // Xóa giá trị trong ô nhập tiền
 }
 let snowflakes = [];
 
