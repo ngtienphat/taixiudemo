@@ -16,33 +16,30 @@ document.getElementById('login-form').addEventListener('submit', function (e) {
         localStorage.setItem('userLoggedIn', true);
         localStorage.setItem('username', username); // Lưu username
 
-        // Hiển thị thông báo thành công
-        successNotification.classList.add('show');
-
-        // Chuyển hướng sang trang chính sau 3 giây
+        // Chuyển hướng sang trang chính
         setTimeout(function() {
             window.location.href = 'index.html';
         }, 3000);
     } else {
         // Hiển thị thông báo lỗi
-        errorNotification.classList.add('show');
+        errorNotification.classList.add('show'); // Hiển thị thông báo lỗi
         setTimeout(function() {
-            errorNotification.classList.remove('show');
+            errorNotification.classList.remove('show'); // Ẩn thông báo sau 3 giây
         }, 3000);
     }
 });
 let snowflakes = [];
 
 function createSnowflake() {
-    if (snowflakes.length >= 100) return; // Giới hạn số lượng bông tuyết
+    if (snowflakes.length >= 50) return; // Giảm số lượng bông tuyết từ 100 xuống 50
 
     const snowflake = document.createElement("div");
     snowflake.classList.add("snowflake");
     snowflake.innerHTML = "❄";
 
     snowflake.style.left = Math.random() * window.innerWidth + "px";
-    snowflake.style.fontSize = Math.random() * 10 + 10 + "px";
-    snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+    snowflake.style.fontSize = Math.random() * 10 + 10 + "px"; // Kích thước bông tuyết
+    snowflake.style.animationDuration = Math.random() * 3 + 2 + "s"; // Tốc độ rơi
 
     document.getElementById("snow-container").appendChild(snowflake);
     snowflakes.push(snowflake);
@@ -55,7 +52,7 @@ function createSnowflake() {
 
 function snowLoop() {
     createSnowflake();
-    requestAnimationFrame(snowLoop);
+    setTimeout(snowLoop, 200); // Giảm tốc độ tạo bông tuyết (thay vì requestAnimationFrame)
 }
 
 snowLoop();
