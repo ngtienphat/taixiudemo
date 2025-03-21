@@ -16,15 +16,18 @@ document.getElementById('login-form').addEventListener('submit', function (e) {
         localStorage.setItem('userLoggedIn', true);
         localStorage.setItem('username', username); // Lưu username
 
-        // Chuyển hướng sang trang chính
+        // Hiển thị thông báo thành công
+        successNotification.classList.add('show');
+
+        // Chuyển hướng sang trang chính sau 3 giây
         setTimeout(function() {
             window.location.href = 'index.html';
         }, 3000);
     } else {
         // Hiển thị thông báo lỗi
-        errorNotification.classList.add('show'); // Hiển thị thông báo lỗi
+        errorNotification.classList.add('show');
         setTimeout(function() {
-            errorNotification.classList.remove('show'); // Ẩn thông báo sau 3 giây
+            errorNotification.classList.remove('show');
         }, 3000);
     }
 });
