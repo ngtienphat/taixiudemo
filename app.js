@@ -19,7 +19,71 @@ function formatCurrency(input) {
     value = parseInt(value, 10) || 0;
     input.value = value.toLocaleString("vi-VN") + " VND"; // Thêm dấu phẩy và đơn vị
 }
+let currentNotification = null; // Biến để lưu thông báo hiện tại
+
+function closeNotification() {
+    if (currentNotification) {
+        currentNotification.classList.remove('show');
+        setTimeout(() => {
+            currentNotification.remove();
+            currentNotification = null;
+        }, 500); // Thời gian để thông báo biến mất hoàn toàn
+    }
+}
+function showJackpotNotification(message, isWin) {
+    closeNotification(); // Đóng thông báo hiện tại nếu có
+
+    const jackpotNotification = document.createElement('div');
+    jackpotNotification.classList.add('jackpot-notification');
+    if (!isWin) {
+        jackpotNotification.classList.add('lose');
+    }
+    jackpotNotification.innerText = message;
+    document.body.appendChild(jackpotNotification);
+
+    // Lưu thông báo hiện tại
+    currentNotification = jackpotNotification;
+
+    // Hiển thị thông báo
+    setTimeout(() => {
+        jackpotNotification.classList.add('show');
+    }, 100);
+
+    // Tạo hiệu ứng pháo hoa nếu thắng
+    if (isWin) {
+        createFireworks();
+    }
+
+    // Ẩn thông báo sau 15 giây
+    setTimeout(() => {
+        closeNotification();
+    }, 15000); // 15 giây
+}
+
+
+
+function createFireworks() {
+    const fireworksContainer = document.createElement('div');
+    fireworksContainer.classList.add('fireworks');
+    document.body.appendChild(fireworksContainer);
+
+    for (let i = 0; i < 50; i++) {
+        const firework = document.createElement('div');
+        firework.classList.add('firework');
+        firework.style.left = `${Math.random() * 100}%`;
+        firework.style.top = `${Math.random() * 100}%`;
+        firework.style.animationDelay = `${Math.random() * 1}s`;
+        fireworksContainer.appendChild(firework);
+    }
+
+    // Xóa hiệu ứng pháo hoa sau 2 giây
+    setTimeout(() => {
+        fireworksContainer.remove();
+    }, 2000);
+}
 function playGame(choice) {
+    closeNotification(); // Đóng thông báo hiện tại khi bắt đầu lượt cược mới
+
     const betInput = document.getElementById("bet-amount").value.replace(/\D/g, "");
     const betAmount = parseInt(betInput, 10);
 
@@ -59,18 +123,20 @@ function playGame(choice) {
             const winnings = betAmount * 2;
             gameResult.innerHTML = `🎉 Bạn đã thắng! Nhận được: ${winnings.toLocaleString("vi-VN")} VND`;
             gameResult.style.color = "green";
+
+            // Hiển thị thông báo nổ hũ khi thắng
+            showJackpotNotification(`🎉 Nổ Hũ! Bạn đã thắng ${winnings.toLocaleString("vi-VN")} VND`, true);
         } else {
             gameResult.innerHTML = `❌ Bạn đã thua! Mất: ${betAmount.toLocaleString("vi-VN")} VND`;
             gameResult.style.color = "red";
+
+            // Hiển thị thông báo thua
+            showJackpotNotification(`❌ Bạn đã thua ${betAmount.toLocaleString("vi-VN")} VND`, false);
         }
 
         // Xóa số tiền đã cược sau khi hiển thị kết quả
-        clearBet();
+    
     }, 1200); // Kết thúc quay trong 1.2 giây
-}
-function clearBet() {
-    const betInput = document.getElementById("bet-amount");
-    betInput.value = ""; // Xóa giá trị trong ô nhập tiền
 }
 let snowflakes = [];
 
