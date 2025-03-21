@@ -63,20 +63,27 @@ function playGame(choice) {
             gameResult.innerHTML = `❌ Bạn đã thua! Mất: ${betAmount.toLocaleString("vi-VN")} VND`;
             gameResult.style.color = "red";
         }
+
+        // Xóa số tiền đã cược sau khi hiển thị kết quả
+        clearBet();
     }, 1200); // Kết thúc quay trong 1.2 giây
+}
+function clearBet() {
+    const betInput = document.getElementById("bet-amount");
+    betInput.value = ""; // Xóa giá trị trong ô nhập tiền
 }
 let snowflakes = [];
 
 function createSnowflake() {
-    if (snowflakes.length >= 100) return; // Giới hạn số lượng bông tuyết
+    if (snowflakes.length >= 50) return; // Giảm số lượng bông tuyết từ 100 xuống 50
 
     const snowflake = document.createElement("div");
     snowflake.classList.add("snowflake");
     snowflake.innerHTML = "❄";
 
     snowflake.style.left = Math.random() * window.innerWidth + "px";
-    snowflake.style.fontSize = Math.random() * 10 + 10 + "px";
-    snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+    snowflake.style.fontSize = Math.random() * 10 + 10 + "px"; // Kích thước bông tuyết
+    snowflake.style.animationDuration = Math.random() * 3 + 2 + "s"; // Tốc độ rơi
 
     document.getElementById("snow-container").appendChild(snowflake);
     snowflakes.push(snowflake);
@@ -89,7 +96,7 @@ function createSnowflake() {
 
 function snowLoop() {
     createSnowflake();
-    requestAnimationFrame(snowLoop);
+    setTimeout(snowLoop, 200); // Giảm tốc độ tạo bông tuyết (thay vì requestAnimationFrame)
 }
 
 snowLoop();
