@@ -601,7 +601,7 @@ button:active {
     height: 10px;
     background: #ff1493;
     border-radius: 50%;
-    animation: explode 1s ease-out;
+    animation: explode 2s ease-out infinite; /* Kéo dài animation và lặp vô hạn */
 }
 
 @keyframes explode {
@@ -609,8 +609,25 @@ button:active {
         transform: scale(0);
         opacity: 1;
     }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
     100% {
         transform: scale(10);
+        opacity: 0;
+    }
+}
+/* Hiệu ứng fade-out cho pháo hoa */
+.fireworks.fade-out {
+    animation: fadeOut 1s ease-out forwards; /* Hiệu ứng mờ dần trong 1 giây */
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
         opacity: 0;
     }
 }
