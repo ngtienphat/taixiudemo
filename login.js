@@ -16,6 +16,12 @@ document.getElementById('login-form').addEventListener('submit', function (e) {
         localStorage.setItem('userLoggedIn', true);
         localStorage.setItem('username', username); // Lưu username
 
+        // Hiển thị thông báo thành công
+        successNotification.classList.add('show'); // Hiển thị thông báo thành công
+        setTimeout(function() {
+            successNotification.classList.remove('show'); // Ẩn thông báo sau 3 giây
+        }, 3000);
+
         // Chuyển hướng sang trang chính
         setTimeout(function() {
             window.location.href = 'index.html';
@@ -28,6 +34,7 @@ document.getElementById('login-form').addEventListener('submit', function (e) {
         }, 3000);
     }
 });
+
 let snowflakes = [];
 
 function createSnowflake() {
