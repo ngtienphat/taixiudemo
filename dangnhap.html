@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wave"></div>
+    <div id="snow-container"></div> 
+
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <span class="website-name">THD CLUB</span>
+            </div>
+            <!-- Form đăng nhập / đăng ký -->
+            <form id="login-form">
+                <div class="input-container">
+                    <input type="text" id="username" placeholder="Tài khoản" required>
+                </div>
+                <div class="input-container">
+                    <input type="password" id="password" placeholder="Mật khẩu" required>
+                </div>
+                <button type="submit">Đăng nhập</button>
+            </form>
+    
+            <!-- Liên kết chuyển đổi giữa đăng nhập và đăng ký -->
+            <div class="auth-footer">
+                <p>Chưa có tài khoản? <a href="dangky.html">Đăng Ký</a></p>
+            </div>
+        </div>
+    </div>
+    
+    
+
+<!-- Thêm liên kết đến FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- Thông báo lỗi khi đăng nhập -->
+<div id="login-notification" class="notification error">
+    <i class="fas fa-times-circle"></i>
+    <span>Tài khoản hoặc mật khẩu không đúng!</span>
+</div>
+
+<!-- Thông báo thành công khi đăng nhập -->
+<div id="success-notification" class="notification success">
+    <i class="fas fa-check-circle"></i>
+    <span>Đăng nhập thành công! Đang chuyển hướng...</span>
+</div>
+
+    <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="snow-container"></div> 
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <div class="website-name">THD CLUB</div>
+            </div>
+            <form id="register-form">
+                <div class="input-container">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-container">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="input-container">
+                    <label for="confirm-password">Xác nhận mật khẩu</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+                <button type="submit">Đăng Ký</button>
+            </form>
+
+            <!-- Nút chuyển đến trang Đăng Nhập -->
+            <div class="auth-footer">
+                <p>Đã có tài khoản? <a href="dangnhap.html">Đăng Nhập</a></p>
+            </div>
+        </div>
+    </div>
+<!-- Thêm liên kết đến FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <!-- Thông báo lỗi khi đăng ký -->
+    <div id="register-notification" class="notification error">
+        Mật khẩu và xác nhận mật khẩu không khớp!
+    </div>
+
+    <!-- Thông báo thành công khi đăng ký -->
+    <div id="notification" class="notification success">
+        Đăng ký thành công!
+    </div>
+
+    <script src="register.js"></script>
+</body>
+</html>

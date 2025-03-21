@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sảnh Chính</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wave"></div>
+    <div id="snow-container"></div> 
+
+    <div class="auth-container">
+        <!-- Navbar with logout button -->
+        <div class="navbar">
+            <button id="logout-btn" onclick="logout()">Đăng Xuất</button>
+        </div>
+
+        <!-- Main content (Dashboard or sảnh chính) -->
+        <div class="dashboard">
+            <h1>♪ 𝑵𝒈𝑻𝒊𝒆̂́𝒏 𝑷𝒉𝒂́𝒕 ♪</h1>
+            <p id="welcome-message">Design and Create By NgTien Phat.</p>
+
+
+        
+            <div class="game-container">
+                <h2>Demo Tài Xỉu</h2>
+           
+                <div class="dice-box">
+                    <div class="dice" id="dice1">?</div>
+                    <div class="dice" id="dice2">?</div>
+                    <div class="dice" id="dice3">?</div>
+                </div>
+            
+                <div class="bet-container">
+                    <label for="bet-amount">Nhập số tiền cược (VND):</label>
+                    <input type="text" id="bet-amount" placeholder="Nhập số tiền..." oninput="formatCurrency(this)">
+                </div>
+            
+                <div class="buttons">
+                    <button id="tai-btn" onclick="playGame('tai')">Tài</button>
+                    <button id="xiu-btn" onclick="playGame('xiu')">Xỉu</button>
+                </div>
+            
+                <div id="game-result" class="game-result"></div>
+            </div>
+            
+            
+            
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
